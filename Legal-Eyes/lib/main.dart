@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:legal_eyes/pages/homepage.dart';
+import 'package:legal_eyes/pages/landing_page.dart';
 
 
 void main() {
@@ -13,7 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: FelonyDescriptionScreen(),
+      home: LandingPage(),
     );
   }
 }

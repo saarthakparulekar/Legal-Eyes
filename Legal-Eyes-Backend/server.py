@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
-from analyze import findSection
+from analyze_v2 import findSection
 
 app = Flask(__name__)
 CORS(app)
@@ -18,7 +18,7 @@ def recieve_data():
         result = findSection(description)
         print(result)
         print(f'description recieved : {description}')
-        return jsonify({'message': result}),200
+        return jsonify(result),200
 
 if __name__ == '__main__':
     app.run(debug=True, host= '0.0.0.0',port=51561)
