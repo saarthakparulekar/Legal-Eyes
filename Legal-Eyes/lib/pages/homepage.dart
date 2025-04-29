@@ -16,41 +16,39 @@ class _FelonyDescriptionScreenState extends State<FelonyDescriptionScreen> {
 
 
   Future<void> _submitAndAnalyze() async {
-
-    //Storing the description and sending it to result page
     final description = _descriptionController.text;
 
-    //Sending the description to the backend
-    var url = 'http://127.0.0.1:51561/data';
-    var headers = {'Content-Type':'application/json'};
-    var body = jsonEncode({'description' : description});
-    var verdict = '';
+    const url = 'http://192.168.1.10:51561/data';
+    final headers = {'Content-Type': 'application/json'};
+    final body = jsonEncode({'description': description});
+
     try {
-      var response = await putData(url, headers, body);
+      final response = await putData(url, headers, body);
+
       if (response.statusCode == 200) {
-        var decodedData = jsonDecode(response.body);
-        verdict = decodedData['message'];
+        final decodedData = jsonDecode(response.body);
+        final legalVerdict = LegalVerdict.fromJson(decodedData);
+
         print('Data sent successfully: ${response.body}');
+
+        // ✅ Navigate to result page here, where decodedData is in scope
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ResultPage(
+              description: description,
+              verdict: legalVerdict,
+            ),
+          ),
+        );
       } else {
         print('Failed to send data. Status code: ${response.statusCode}');
       }
     } catch (e) {
       print('Error: $e');
     }
-
-    //Getting the data from the backend
-    // var data = await getData('http://127.0.0.1:51561/');
-    // var decodedData = jsonDecode(data);
-    // var verdict = decodedData['Verdict'];
-
-    //Routing to the result page
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => ResultPage(description: description, verdict: verdict,)
-        ),
-    );
   }
+
 
 
 
