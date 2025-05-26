@@ -1,4 +1,4 @@
-# 👁️ Legal Eyes
+# Legal Eyes
 
 **Legal Eyes** is an intelligent web application that allows users to submit descriptions of crimes. Using natural language processing, the app analyzes the text and identifies relevant sections of the Indian Penal Code (IPC) based on the content of the report.
 
